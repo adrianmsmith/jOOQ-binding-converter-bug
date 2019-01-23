@@ -44,6 +44,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import org.jooq.DSLContext;
+import org.jooq.Record2;
 import org.jooq.impl.DSL;
 import org.jooq.mcve.tables.records.TestRecord;
 
@@ -71,14 +72,7 @@ public class MCVETest {
 
     @Test
     public void mcveTest() {
-        TestRecord result =
-        ctx.insertInto(TEST)
-           .columns(TEST.VALUE)
-           .values(42)
-           .returning(TEST.ID)
-           .fetchOne();
-
-        result.refresh();
-        assertEquals(42, (int) result.getValue());
+        Record2<Integer, String> x = ctx.select(TEST.ID, TEST.MY_COLUMN).from(TEST).fetchOne();
+        assertEquals("BarFooStringInDatabase", x.value2());
     }
 }

@@ -53,8 +53,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <source>10</source>
-                    <target>10</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
 
@@ -103,6 +103,14 @@
                                 <database>
                                     <includes>.*</includes>
                                     <inputSchema>MCVE</inputSchema>
+                                    <forcedTypes>
+<forcedType>
+    <userType>java.lang.String</userType>
+    <binding>foo.PrefixFooBinding</binding>
+    <converter>foo.PrefixBarConverter</converter>
+    <expression>MY_COLUMN</expression>
+</forcedType>
+                                    </forcedTypes>
                                 </database>
                                 <generate>
                                     <generatedAnnotation>false</generatedAnnotation>
